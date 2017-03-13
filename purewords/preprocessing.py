@@ -86,6 +86,14 @@ def replace_title(document):
     document = re.sub("ma'am", "madam", document)
     return document
 
+def replace_abbreviation(document):
+    document = re.sub("I'm ", "I am ", document)
+    document = re.sub("(Y|y)ou're ", "you are ", document)
+    document = re.sub("'s ", "", document)
+    document = re.sub("'ll ", " will ", document)
+    document = re.sub("'d ", " would ", document)
+    return document
+
 def remove_angle_brackets(document):
     return re.sub("<.+?>", "", document)
 
@@ -101,6 +109,9 @@ def remove_meaning_notation(config, document):
 
     if config['replace_title']:
         document = replace_title(document)
+
+    if config['replace_abbreviation']:
+        document = replace_abbreviation(document)
 
     if config['remove_angle_brackets']:
         document = remove_angle_brackets(document)
