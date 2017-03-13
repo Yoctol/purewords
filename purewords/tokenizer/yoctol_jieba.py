@@ -40,6 +40,7 @@ class yoctol_jieba(object):
     def __init__(self):
         file_path = os.path.abspath(__file__)
         file_dir = os.path.dirname(file_path)
+        jieba.setLogLevel(0)
         jieba.set_dictionary(os.path.join(file_dir, 'dict.txt.big.txt'))
         tune_tokenizer(jieba)
 
