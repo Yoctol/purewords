@@ -1,7 +1,9 @@
 # purewords
 Purewords is a package used to clean raw texts for all languages. 
 
-* Usage:
+* Usage
+
+  * module usage:
 
   ```
   >>> import purewords
@@ -16,4 +18,32 @@ Purewords is a package used to clean raw texts for all languages.
   ['ha ha hi hi', 'hello i am at', 'you know yahoo', 'my computer is great', 'my phone number is', '的 my password 123 abc 99 y y']
   ```
 
-You can set up your configuration in `purewords/configs/default.yml`
+  * command line usage:
+  
+    preprocess several text files with multithreads.
+  
+  ```
+  usage: python -m purewords input_file_path
+
+  Purewords command line interface
+  Clean text from files.
+
+  positional arguments:
+    input_path            data file path
+
+  optional arguments:
+    -h, --help            show this help message and exit
+    -d, --dir             set it up to process all txt files in the directory
+    -j [job_number], --job_number [job_number]
+                        the thread number used in preprocessing
+    -max [max_len], --max_len [max_len]
+                        the maximun length of a sentence
+    -min [min_len], --min_len [min_len]
+                        the minimun length of a sentence
+    -bs [batch_size], --batch_size [batch_size]
+                        the average number of processed sentence per thread
+    -v [verbose], --verbose [verbose]
+                        the verbose level in multiprocessing
+    -o [output_file_path], --output [output_file_path]
+                        the cleaned output file path
+  ```
