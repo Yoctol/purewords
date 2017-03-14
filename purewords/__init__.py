@@ -32,11 +32,11 @@ class PureWords(object):
         purewords_path = os.path.abspath(__file__)
         purewords_dir = os.path.dirname(purewords_path)
 
-        stopwords_file = open(
-            os.path.join(purewords_dir, self.config['stopwords_path']), 'r'
+        stopwords_path = os.path.join(
+            purewords_dir, self.config['stopwords_path']
         )
-        self.stopwords_set = set(stopwords_file.read().splitlines())
-        stopwords_file.close()
+        with open(stopwords_path, 'r') as stopwords_file:
+            self.stopwords_set = set(stopwords_file.read().splitlines())
 
         module = importlib.import_module('purewords.tokenizer.' + self.config['tokenizer'])
         tokenizer = getattr(module, self.config['tokenizer'])
