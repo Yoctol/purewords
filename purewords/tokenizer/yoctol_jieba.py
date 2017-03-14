@@ -45,7 +45,7 @@ class yoctol_jieba(object):
         tune_tokenizer(jieba)
 
     def cut(self, sentence):
-        splitted_sentences = jieba.lcut(sentence)
-        while '_' in splitted_sentences:
-            splitted_sentences.remove('_')
-        return splitted_sentences
+        splitted_tokens = jieba.lcut(sentence)
+        while '_' in splitted_tokens:
+            splitted_tokens.remove('_')
+        return splitted_tokens

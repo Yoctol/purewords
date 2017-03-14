@@ -5,6 +5,8 @@ def cut_sentence(text_str, tokenizer):
     tokenized_text_lst = tokenizer.cut(text_str)
     while ' ' in tokenized_text_lst:
         tokenized_text_lst.remove(' ')
+    while '' in tokenized_text_lst:
+        tokenized_text_lst.remove('')
     return ' '.join(tokenized_text_lst)
 
 def clean_notation(sentence):
@@ -62,7 +64,9 @@ def split_document(document, min_sen_len=30, max_sen_len=200):
 
 def remove_url(document):
     url_patterns = [
-        "(http.+?(?=(\n| |$)))", "( [^ ]+?\.com.*?(?=(\n| |$)))"
+        "((http|ftp).+?(?=[^a-zA-Z\d./?:;#%=]))",
+        "([a-zA-Z\d./@?;:#%=]+?\.com.*?(?=([^a-zA-Z\d./@?;:#%=]|$)))",
+        "([a-zA-Z\d./@?;:#%=]+?@.*?(?=([^a-zA-Z\d./@?;:#%=]|$)))"
     ]
     return re.sub('|'.join(url_patterns), '', document)
 
@@ -89,13 +93,15 @@ def replace_title(document):
 def replace_abbreviation(document):
     document = re.sub("I'm ", "I am ", document)
     document = re.sub("(Y|y)ou're ", "you are ", document)
-    document = re.sub("'s ", "", document)
+    document = re.sub("'s ", " ", document)
     document = re.sub("'ll ", " will ", document)
     document = re.sub("'d ", " would ", document)
     return document
 
 def remove_angle_brackets(document):
-    return re.sub("<.+?>", "", document)
+    while re.search("<[^<>]*?>", document) is not None:
+        document = re.sub("<[^<>]*?>", "", document)
+    return document
 
 def remove_meaning_notation(config, document):
     if config['remove_url']:
