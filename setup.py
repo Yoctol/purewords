@@ -9,10 +9,12 @@ except IOError:
 setup(
     name="purewords",
     version="0.1.0",
-    description="A pip package",
+    description="A NLP preprocessing package",
     license="MIT",
     author="EN, PLLiao",
-    packages=find_packages(),
+    packages=['purewords'],
+    package_dir={'purewords':'purewords'},
+    package_data={'purewords':['*.*','tokenizer/*', 'configs/*']},
     install_requires=[],
     long_description=long_description,
     classifiers=[
