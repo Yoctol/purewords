@@ -66,22 +66,23 @@ def split_document(document, min_sen_len=30, max_sen_len=200):
 
 def remove_url(document):
     url_patterns = [
-        "((http|ftp).+?(?=[^a-zA-Z\d./?:;#%=]))",
-        "([a-zA-Z\d./@?;:#%=]+?\.com.*?(?=([^a-zA-Z\d./@?;:#%=]|$)))",
-        "([a-zA-Z\d./@?;:#%=]+?@.*?(?=([^a-zA-Z\d./@?;:#%=]|$)))"
+        "((http|ftp).+?(?=([^a-zA-Z&,\-!\d./?:;#%=]|$)))",
+        "([a-zA-Z&,!\d\-./@?;:#%=]+?\.com.*?(?=([^a-zA-Z\d\-!&,./@?;:#%=]|$)))",
+        "([a-zA-Z&,!\d\-./@?;:#%=]+?@.*?(?=([^a-zA-Z\d!\-&,./@?;:#%=]|$)))"
     ]
     return re.sub('|'.join(url_patterns), '', document)
 
 def remove_time(document):
     time_patterns = [
-        "(\d\d:\d\d)", "(\d\d\d\d-\d\d-\d\d)", "(\d{7,8})"
+        "([0-2]\d:[0-5]\d)", "(20\d\d-{0,1}[0-1]\d-{0,1}[0-3]\d)",
+        "1[0-1]\d-{0,1}[0-1]\d-{0,1}[0-3]\d"
     ]
     return re.sub('|'.join(time_patterns), '', document)
 
 def remove_phone_number(document):
     phone_patterns = [
-        "(\d\d\d\d-\d\d\d-\d\d\d)", "(\d\d-\d\d\d\d-\d\d\d\d)",
-        "(\d\d-\d\d\d-\d\d\d\d)"
+        "(0800-{0,1}\d\d\d-{0,1}\d\d\d)", "(02-{0,1}\d\d\d\d-{0,1}\d\d\d\d)",
+        "(0[3-8]-{0,1}\d\d\d-{0,1}\d\d\d\d)", "(09\d\d-{0,1}\d\d\d-{0,1}\d\d\d)"
     ]
     return re.sub('|'.join(phone_patterns), '', document)
 

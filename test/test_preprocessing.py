@@ -29,7 +29,7 @@ class TestPreprocessingClass(unittest.TestCase):
         self.assertEqual(answer, remove_angle_brackets(sentence))
 
     def test_remove_phone_number(self):
-        sentence = "薄餡手機是:0800-092-000, 家電請打:02-2266-2266或08-449-5978"
+        sentence = "薄餡手機是:0912345678, 家電請打:02-2266-2266或08-449-5978"
         answer = "薄餡手機是:, 家電請打:或"
         self.assertEqual(answer, remove_phone_number(sentence))
 
