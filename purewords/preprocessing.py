@@ -106,9 +106,15 @@ def remove_angle_brackets(document):
         document = re.sub("<[^<>]*?>", "", document)
     return document
 
+def remove_blank(document):
+    return re.sub('_{2,}', '_', document)
+
 def remove_meaning_notation(config, document):
     if config['remove_url']:
         document = remove_url(document)
+
+    if config['remove_blank']:
+        document = remove_blank(document)
 
     if config['remove_time']:
         document = remove_time(document)

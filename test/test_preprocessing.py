@@ -10,6 +10,7 @@ from purewords.preprocessing import replace_abbreviation
 from purewords.preprocessing import replace_title
 from purewords.preprocessing import split_document
 from purewords.preprocessing import split_sentence
+from purewords.preprocessing import remove_blank
 
 from purewords.tokenizer.whitespace_tokenizer import whitespace_tokenizer
 
@@ -82,3 +83,8 @@ class TestPreprocessingClass(unittest.TestCase):
         sentence = "  Hi Hi my_computer is perfect!! _ "
         answers = 'Hi Hi my_computer is perfect!!'
         self.assertEqual(answers, cut_sentence(sentence, self.tokenizer))
+
+    def test_remove_blank(self):
+        sentence = 'Hello I am ______ blank!!'
+        answer = 'Hello I am _ blank!!'
+        self.assertEqual(answer, remove_blank(sentence))

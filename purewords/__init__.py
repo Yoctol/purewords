@@ -13,13 +13,15 @@ class PureWords(object):
     def __init__(self, tokenizer='yoctol_jieba',
             remove_url=True, remove_time=True,
             remove_phone_number=True, replace_title=True,
-            replace_abbreviation=True, remove_angle_brackets=True,
+            remove_blank=True, replace_abbreviation=True,
+            remove_angle_brackets=True,
             stopwords_path='configs/stopwords.txt', max_len=200,
             min_len=1
         ):
         self.config = {}
         self.config['tokenizer'] = tokenizer
         self.config['remove_url'] = remove_url
+        self.config['remove_blank'] = remove_blank
         self.config['remove_time'] = remove_time
         self.config['remove_phone_number'] = remove_phone_number
         self.config['replace_title'] = replace_title
