@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
-
 import re
 
-def cut_sentence(text_str, tokenizer):
+def word_length(sentence):
+    return sentence.count(' ') + 1
+
+def tokenize_sentence(text_str, tokenizer):
     tokenized_text_lst = tokenizer.cut(text_str)
     while ' ' in tokenized_text_lst:
         tokenized_text_lst.remove(' ')
@@ -11,20 +13,29 @@ def cut_sentence(text_str, tokenizer):
         tokenized_text_lst.remove('')
     return ' '.join(tokenized_text_lst)
 
-def clean_notation(sentence):
-    sentence = re.sub('[^\w\d]', ' ', sentence)
+def set_sentence_splitting_token(sentence):
+    sentence = re.sub('[^\w\d ]', ';', sentence)
+    sentence = re.sub(';+', ';', sentence)
+    sentence = re.sub('^;+|;+$', '', sentence)
+    sentence = re.sub(' +', ' ', sentence)
+    sentence = re.sub('^ +| +$', '', sentence)
+    return sentence.lower()
+
+def clean_sentence_splitting_token(sentence):
+    sentence = re.sub(';', ' ', sentence)
     sentence = re.sub(' +', ' ', sentence)
     sentence = re.sub('^ +| +$', '', sentence)
     return sentence.lower()
 
 def split_sentence(sentence, min_sen_len=30, max_sen_len=200):
     splitted_sentences = []
-    sub_sents = sentence.split(' ')
+    sub_sents = sentence.split(';')
     sub_sent_list = []
     sen_len = 0
     for sub_sent in sub_sents:
-        if sen_len + len(sub_sent) < max_sen_len:
-            sen_len += len(sub_sent)
+        sub_sent_length = word_length(sub_sent)
+        if sen_len + sub_sent_length < max_sen_len:
+            sen_len += sub_sent_length
             sub_sent_list.append(sub_sent)
         elif sen_len < min_sen_len:
             sub_sent_list.append(sub_sent)
@@ -34,14 +45,14 @@ def split_sentence(sentence, min_sen_len=30, max_sen_len=200):
         else:
             splitted_sentences.append(' '.join(sub_sent_list))
             sub_sent_list = [sub_sent]
-            sen_len = len(sub_sent)
+            sen_len = sub_sent_length
     if sen_len > 0 and sen_len < min_sen_len:
         splitted_sentences[-1] += ' ' + ' '.join(sub_sent_list)
     elif sen_len >= min_sen_len:
         splitted_sentences.append(' '.join(sub_sent_list))
     return splitted_sentences
 
-def split_document(document, min_sen_len=30, max_sen_len=200):
+def split_document(document, tokenizer, min_sen_len=30, max_sen_len=200):
     confident_splitting_tokens = [
         '。', '\n', '\\\\n',
         '！', '\![^\w\d]',
@@ -51,16 +62,20 @@ def split_document(document, min_sen_len=30, max_sen_len=200):
     sentences = re.split('|'.join(confident_splitting_tokens), document)
     clean_sentences = []
     for sentence in sentences:
-        sentence = clean_notation(sentence)
-        if len(sentence) < min_sen_len:
+        sentence = set_sentence_splitting_token(sentence)
+        sentence = tokenize_sentence(sentence, tokenizer)
+        sentence = re.sub(' ; ', ';', sentence)
+        sentence_word_length = word_length(sentence)
+        if sentence_word_length < min_sen_len:
             continue
-        elif len(sentence) > max_sen_len:
+        elif sentence_word_length > max_sen_len:
             splitted_sentences = split_sentence(
                 sentence, min_sen_len, max_sen_len
             )
             for splitted_sentence in splitted_sentences:
                 clean_sentences.append(splitted_sentence)
         else:
+            sentence = clean_sentence_splitting_token(sentence)
             clean_sentences.append(sentence)
     return clean_sentences
 
@@ -97,8 +112,8 @@ def replace_abbreviation(document):
     document = re.sub("I'm ", "I am ", document)
     document = re.sub("(Y|y)ou're ", "you are ", document)
     document = re.sub("'s ", " ", document)
-    document = re.sub("'ll ", " will ", document)
-    document = re.sub("'d ", " would ", document)
+    document = re.sub("'ll |’ll ", " will ", document)
+    document = re.sub("'d |’d ", " would ", document)
     return document
 
 def remove_angle_brackets(document):

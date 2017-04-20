@@ -5,7 +5,7 @@ import importlib
 from .preprocessing import remove_meaning_notation
 from .preprocessing import remove_stopwords
 from .preprocessing import split_document
-from .preprocessing import cut_sentence
+from .preprocessing import tokenize_sentence
 
 
 class PureWords(object):
@@ -52,15 +52,9 @@ class PureWords(object):
         document = remove_meaning_notation(self.config, document)
         document = remove_stopwords(document, self.stopwords_set)
         sentences = split_document(
-            document, self.config['min_len'], self.config['max_len']
+            document, self.tokenizer, self.config['min_len'], self.config['max_len']
         )
-        tokenized_sentences = []
-
-        for sentence in sentences:
-            tokenized_sentences.append(
-                cut_sentence(sentence, self.tokenizer)
-            )
-        return tokenized_sentences
+        return sentences
 
 
 pure_words = PureWords()
