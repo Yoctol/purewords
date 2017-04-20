@@ -22,7 +22,7 @@ def parse():
                         default=200, type=int, nargs='?',
                         help="the maximun length of a sentence")
     parser.add_argument('-min', '--min_len', metavar='min_len',
-                        default=200, type=int, nargs='?',
+                        default=1, type=int, nargs='?',
                         help="the minimun length of a sentence")
     parser.add_argument('-bs', '--batch_size', metavar='batch_size',
                         default=8000, type=int, nargs='?',
@@ -76,12 +76,17 @@ def generate_tokenized_corpus(args, input_file_path, out_file):
     batch_size = args.job_number * args.batch_size
     processed_number = 0
 
+    customed_purewords = purewords.PureWords(
+        min_len=args.min_len,
+        max_len=args.max_len
+    )
+
     print('processing ' + os.path.basename(input_file_path) + '...')
     info = ""
 
     for raw_document_list in sentences_generator(input_file_path, batch_size):
         corpus = Parallel(n_jobs=args.job_number, verbose=args.verbose)(
-            delayed(purewords.clean_document)
+            delayed(customed_purewords.clean_document)
             (document) for document in raw_document_list
         )
 
