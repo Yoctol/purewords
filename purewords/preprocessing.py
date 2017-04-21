@@ -29,6 +29,7 @@ def clean_sentence_splitting_token(sentence):
 
 def split_sentence(sentence, min_sen_len=30, max_sen_len=200):
     splitted_sentences = []
+    sentence = re.sub(' ;', ';', sentence)
     sub_sents = sentence.split(';')
     sub_sent_list = []
     sen_len = 0
@@ -64,7 +65,7 @@ def split_document(document, tokenizer, min_sen_len=30, max_sen_len=200):
     for sentence in sentences:
         sentence = set_sentence_splitting_token(sentence)
         sentence = tokenize_sentence(sentence, tokenizer)
-        sentence = re.sub(' ; ', ';', sentence)
+        sentence = re.sub(' ; ', ' ;', sentence)
         sentence_word_length = word_length(sentence)
         if sentence_word_length < min_sen_len:
             continue
