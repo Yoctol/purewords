@@ -14,60 +14,80 @@ Purewords is a package used to clean raw texts for all languages.
 
   ### Module usage:
 
-  ```
+  ```python
   import purewords
   
   # raw sentence
-  sentence = "ha hi!!hello I\'m at http:www.google.com.tw\n\n" 
-             + "you know yahoo? my_computer is great. My phone number"
-             + "is 02-3366-5678. <br>的啦<br> my password: 123-abc$99&^%Y)\'_\'(Y "
+  inputs = "ha hi!!hello I\'m at http:www.google.com.tw\n\n" 
+           + "you know yahoo? my_computer is great. My phone number"
+           + "is 02-3366-5678. <br>的啦<br> my password: 123-abc$99&^%Y)\'_\'(Y "
+  ```
+  #### Treat inputs as a sentence and clean it. 
   
-  # clean sentence and use white space to split word tokens
+  Word tokens are splitted with whitespace
+  ```python
   # result: string
-  # 'ha hi hello i am at you know yahoo my computer is great my phone number is 的 my password 123 abc 99 y y'
-  purewords.clean_sentence(sentence)
+  purewords.clean_sentence(inputs)
+  'ha hi hello i am at you know yahoo my computer is great my phone number is 的 my password 123 abc 99 y y'
+  ```
   
+  #### Treat inputs as a document and clean it.
   
-  # clean document and split document into several cleaned sentences
+  Split document with some confident splitting token such as '.' or '?'.
+  ```python
   # result: list of cleaned string
-  # ['ha hi', 'hello i am at', 'you know yahoo', 'my computer is great', 
-  #  'my phone number is', '的 my password 123 abc 99 y y']
-  purewords.clean_document(sentence)
+  purewords.clean_document(inputs)
+  ['ha hi', 'hello i am at', 'you know yahoo', 'my computer is great', 'my phone number is', '的 my password 123 abc 99 y y']
+  ```
+
+  ### Customed your purewords
   
+  You can use different setting in purewords.
+  
+  ```python
+  import purewords
+  
+  pw = purewords.PureWords(
+      tokenizer='yoctol_jieba', # select your tokenizer
+      remove_url=True, 
+      remove_time=True, # remove time such as 20170101
+      remove_phone_number=True, 
+      replace_title=True, # replace "Mr." with "Mr" for example
+      remove_blank=True, # remove blank _____ 
+      replace_abbreviation=True, # replace "I'd" with "I would" for example
+      remove_angle_brackets=True,
+      stopwords_path='configs/stopwords.txt', # setup your customed stopwords 
+      max_len=200, # cut long sentence whose length exceed max_len
+      min_len=1 # ignore short sentence 
+  )
+  
+  inputs = 'This is a sentence.'
+  
+  pw.clean_sentence(inputs)
+  pw.clean_document(inputs)
+  ```
+  You can select 'whitespace_tokenizer' tokenizer if you prefer tokenize sentences with whitespace.
+  
+  ```python
+  pw = purewords.PureWords(
+      tokenizer='whitespace_tokenizer'
+  )
   ```
 
   ### Command line usage:
   
-    Preprocess text files into single cleaned document with multithreads.
+  Preprocess text files into a single cleaned document from command line.
   
-  ```
-  usage: python -m purewords input_file_path
-
-  Purewords command line interface
-  Clean texts from files.
-
-  positional arguments:
-    input_path            data file path
-
-  optional arguments:
-    -h, --help            show this help message and exit
-    -d, --dir             set it up to process all txt files in the directory
-    -j [job_number], --job_number [job_number]
-                        the thread number used in preprocessing
-    -max [max_len], --max_len [max_len]
-                        the maximun length of a sentence
-    -min [min_len], --min_len [min_len]
-                        the minimun length of a sentence
-    -bs [batch_size], --batch_size [batch_size]
-                        the average number of processed sentence per thread
-    -v [verbose], --verbose [verbose]
-                        the verbose level in multiprocessing
-    -o [output_file_path], --output [output_file_path]
-                        the cleaned output file path
-  ```
-  #### Clean text files in directory
+  Usage:
   
-  For example, you can use following command to clean all the txt files in your directory.
+  #### Clean single txt files
+  ```
+  python -m purewords input_file_path
+  ```
+ 
+  #### Clean text files in a directory
+  
+  Or, you can use following command to clean all the txt files in your directory.
   ```
   python -m purewords -d your_raw_text_dir
   ```
