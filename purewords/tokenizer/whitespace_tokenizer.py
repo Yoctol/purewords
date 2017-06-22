@@ -1,5 +1,6 @@
+from .base_tokenizer import BaseTokenizer
 
-class whitespace_tokenizer(object):
+class WhitespaceTokenizer(BaseTokenizer):
 
     def cut(self, sentence):
         splitted_tokens =  sentence.split(' ')
