@@ -1,11 +1,11 @@
 import unittest
 
-from purewords.tokenizer.whitespace_tokenizer import whitespace_tokenizer
+from purewords.tokenizer import WhitespaceTokenizer
 
 class TestWhiteSpaceTokenizer(unittest.TestCase):
 
     def setUp(self):
-        self.whitespace_tokenizer = whitespace_tokenizer()
+        self.whitespace_tokenizer = WhitespaceTokenizer()
 
     def test_cut(self):
         sentence = "Hello, my name is cph_cph. cph is _ wonderful."

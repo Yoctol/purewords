@@ -1,11 +1,11 @@
 import unittest
 
-from purewords.tokenizer.yoctol_jieba import yoctol_jieba
+from purewords.tokenizer import YoctolTokenizer
 
 class TestYoctolJiebaClass(unittest.TestCase):
 
     def setUp(self):
-        self.yoctol_jieba = yoctol_jieba()
+        self.yoctol_jieba = YoctolTokenizer()
 
     def test_cut(self):
         sentence = "有顆頭是優拓資訊的好夥伴_"

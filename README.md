@@ -46,9 +46,11 @@ Purewords is a package used to clean raw texts for all languages.
   
   ```python
   import purewords
+  from purewords.tokenizer import YoctolTokenizer
   
+  tokenizer = YoctolTokenizer()
   pw = purewords.PureWords(
-      tokenizer='yoctol_jieba', # select your tokenizer
+      tokenizer=tokenizer, # select your tokenizer
       remove_url=True, 
       remove_time=True, # remove time such as 20170101
       remove_phone_number=True, 
@@ -66,11 +68,34 @@ Purewords is a package used to clean raw texts for all languages.
   pw.clean_sentence(inputs)
   pw.clean_document(inputs)
   ```
-  You can select 'whitespace_tokenizer' tokenizer if you prefer tokenize sentences with whitespace.
+
+  #### Select your tokenizer in purewords
+
+  You can select `WhitespaceTokenizer` tokenizer if you prefer tokenize 
+  sentences with whitespace or `JiebaTokenizer` for default jieba setting.
   
   ```python
+  from purewords.tokenizer import WhitespaceTokenizer
+
+  tokenizer = WhitespaceTokenizer()
   pw = purewords.PureWords(
-      tokenizer='whitespace_tokenizer'
+      tokenizer=tokenizer
+  )
+  ```
+
+  #### Add new words in JiebaTokenizer
+
+  You can add new word in JiebaTokenizer to customize your tokenizer.
+
+  ```python
+  from purewords.tokenizer import JiebaTokenizer
+
+  tokenizer = JiebaTokenizer()
+  tokenizer.add_word(new_word, freq, tag) # The setting is same with jieba.add_word
+  tokenizer.add_words(new_word_list, freq, tag)
+
+  pw = purewords.PureWords(
+      tokenizer=tokenizer
   )
   ```
 

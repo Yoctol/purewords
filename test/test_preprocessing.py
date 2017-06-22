@@ -13,12 +13,12 @@ from purewords.preprocessing import split_document
 from purewords.preprocessing import split_sentence
 from purewords.preprocessing import remove_blank
 
-from purewords.tokenizer.whitespace_tokenizer import whitespace_tokenizer
+from purewords.tokenizer import WhitespaceTokenizer
 
 class TestPreprocessingClass(unittest.TestCase):
 
     def setUp(self):
-        self.tokenizer = whitespace_tokenizer()
+        self.tokenizer = WhitespaceTokenizer()
 
     def test_clean_notation(self):
         sentence = "@@哈哈!!你看看你。＃＃>''<好棒棒++\n"

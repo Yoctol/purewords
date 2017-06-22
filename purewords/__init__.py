@@ -6,11 +6,11 @@ from .preprocessing import remove_meaning_notation
 from .preprocessing import remove_stopwords
 from .preprocessing import split_document
 from .preprocessing import tokenize_sentence
-
+from .tokenizer import YoctolTokenizer
 
 class PureWords(object):
 
-    def __init__(self, tokenizer='yoctol_jieba',
+    def __init__(self, tokenizer,
             remove_url=True, remove_time=True,
             remove_phone_number=True, replace_title=True,
             remove_blank=True, replace_abbreviation=True,
@@ -19,7 +19,7 @@ class PureWords(object):
             min_len=1
         ):
         self.config = {}
-        self.config['tokenizer'] = tokenizer
+        self.config['tokenizer'] = tokenizer.__class__.__name__
         self.config['remove_url'] = remove_url
         self.config['remove_blank'] = remove_blank
         self.config['remove_time'] = remove_time
@@ -40,9 +40,7 @@ class PureWords(object):
         with open(stopwords_path, 'r') as stopwords_file:
             self.stopwords_set = set(stopwords_file.read().splitlines())
 
-        module = importlib.import_module('purewords.tokenizer.' + self.config['tokenizer'])
-        tokenizer = getattr(module, self.config['tokenizer'])
-        self.tokenizer = tokenizer()
+        self.tokenizer = tokenizer
 
     def clean_sentence(self, sentence):
         sentences = self.clean_document(sentence)
@@ -57,7 +55,7 @@ class PureWords(object):
         return sentences
 
 
-pure_words = PureWords()
+pure_words = PureWords(YoctolTokenizer())
 
 clean_sentence = pure_words.clean_sentence
 clean_document = pure_words.clean_document
