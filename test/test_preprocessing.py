@@ -74,7 +74,11 @@ class TestPreprocessingClass(unittest.TestCase):
         ]
         self.assertEqual(
             answers,
-            split_document(document, self.tokenizer, min_sen_len=2)
+            split_document(
+                document,
+                self.tokenizer,
+                min_sentence_length=2
+            )
         )
 
     def test_split_sentence(self):
@@ -86,7 +90,11 @@ class TestPreprocessingClass(unittest.TestCase):
         ]
         self.assertEqual(
             answers,
-            split_sentence(sentence, min_sen_len=5, max_sen_len=5)
+            split_sentence(
+                sentence,
+                min_sentence_length=5,
+                max_sentence_length=5
+            )
         )
 
     def test_tokenize_sentence(self):
