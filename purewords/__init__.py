@@ -11,19 +11,20 @@ from .tokenizer import YoctolTokenizer
 class PureWords(object):
 
     def __init__(self, tokenizer,
-            remove_url=True, remove_time=True,
-            remove_phone_number=True, replace_title=True,
+            replace_url=True, replace_time=True,
+            replace_phone_number=True, replace_title=True,
             remove_blank=True, replace_abbreviation=True,
-            remove_angle_brackets=True,
+            remove_angle_brackets=True, replace_number=True,
             stopwords_path='configs/stopwords.txt', max_len=200,
             min_len=1
         ):
         self.config = {}
         self.config['tokenizer'] = tokenizer.__class__.__name__
-        self.config['remove_url'] = remove_url
+        self.config['replace_url'] = replace_url
         self.config['remove_blank'] = remove_blank
-        self.config['remove_time'] = remove_time
-        self.config['remove_phone_number'] = remove_phone_number
+        self.config['replace_time'] = replace_time
+        self.config['replace_number'] = replace_number
+        self.config['replace_phone_number'] = replace_phone_number
         self.config['replace_title'] = replace_title
         self.config['replace_abbreviation'] = replace_abbreviation
         self.config['remove_angle_brackets'] = remove_angle_brackets

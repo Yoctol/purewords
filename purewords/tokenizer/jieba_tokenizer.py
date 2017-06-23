@@ -12,7 +12,20 @@ class JiebaTokenizer(BaseTokenizer):
         setLogLevel(0)
 
         self.tokenizer = Tokenizer()
-        self.tokenizer.set_dictionary(os.path.join(file_dir, 'dict.txt.big.txt'))
+        self.tokenizer.set_dictionary(
+            os.path.join(
+                file_dir,
+                'dict.txt.big.txt'
+            )
+        )
+
+        specific_tokens = [
+            '_url_',
+            '_number_',
+            '_phone_',
+            '_time_'
+        ]
+        self.add_words(specific_tokens)
 
     def cut(self, sentence):
         splitted_tokens = self.tokenizer.lcut(sentence)
