@@ -27,30 +27,34 @@ def clean_sentence_splitting_token(sentence):
     sentence = re.sub('^ +| +$', '', sentence)
     return sentence.lower()
 
-def split_sentence(sentence, min_sen_len=30, max_sen_len=200):
+def split_sentence(
+        sentence,
+        min_sentence_length=30,
+        max_sentence_length=200
+):
     splitted_sentences = []
     sentence = re.sub(' ;', ';', sentence)
-    sub_sents = sentence.split(';')
-    sub_sent_list = []
-    sen_len = 0
-    for sub_sent in sub_sents:
-        sub_sent_length = word_length(sub_sent)
-        if sen_len + sub_sent_length < max_sen_len:
-            sen_len += sub_sent_length
-            sub_sent_list.append(sub_sent)
-        elif sen_len < min_sen_len:
-            sub_sent_list.append(sub_sent)
-            splitted_sentences.append(' '.join(sub_sent_list))
-            sub_sent_list = []
-            sen_len = 0
+    short_sentences = sentence.split(';')
+    short_sentence_list = []
+    sentence_length = 0
+    for short_sentence in short_sentences:
+        short_sentence_length = word_length(short_sentence)
+        if sentence_length + short_sentence_length < max_sentence_length:
+            sentence_length += short_sentence_length
+            short_sentence_list.append(short_sentence)
+        elif sentence_length < min_sentence_length:
+            short_sentence_list.append(short_sentence)
+            splitted_sentences.append(' '.join(short_sentence_list))
+            short_sentence_list = []
+            sentence_length = 0
         else:
-            splitted_sentences.append(' '.join(sub_sent_list))
-            sub_sent_list = [sub_sent]
-            sen_len = sub_sent_length
-    if sen_len > 0 and sen_len < min_sen_len:
-        splitted_sentences[-1] += ' ' + ' '.join(sub_sent_list)
-    elif sen_len >= min_sen_len:
-        splitted_sentences.append(' '.join(sub_sent_list))
+            splitted_sentences.append(' '.join(short_sentence_list))
+            short_sentence_list = [short_sentence]
+            sentence_length = short_sentence_length
+    if sentence_length > 0 and sentence_length < min_sentence_length:
+        splitted_sentences[-1] += ' ' + ' '.join(short_sentence_list)
+    elif sentence_length >= min_sentence_length:
+        splitted_sentences.append(' '.join(short_sentence_list))
     return splitted_sentences
 
 def split_document(document, tokenizer, min_sen_len=30, max_sen_len=200):
