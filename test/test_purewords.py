@@ -7,12 +7,12 @@ class TestPurewordsClass(unittest.TestCase):
 
     def test_clean_sentence(self):
         sentence = "薄餡=柏憲=cph=cph_is_god\n讚讚讚！聯絡方式：cph@cph.tw, 0912345678"
-        answer = "薄餡 柏憲 cph cph is god 讚 讚 讚 聯絡 方式"
+        answer = "薄餡 柏憲 cph cph is god 讚 讚 讚 聯絡 方式 _url_ _phone_"
         self.assertEqual(answer, purewords.clean_sentence(sentence))
 
     def test_clean_document(self):
         sentence = "薄餡=柏憲=cph=cph_is_god\n讚讚讚！聯絡方式：cph@cph.tw, 0912345678"
-        answer = ["薄餡 柏憲 cph cph is god", "讚 讚 讚", "聯絡 方式"]
+        answer = ["薄餡 柏憲 cph cph is god", "讚 讚 讚", "聯絡 方式 _url_ _phone_"]
         self.assertEqual(answer, purewords.clean_document(sentence))
 
     def test_sentence_generator(self):

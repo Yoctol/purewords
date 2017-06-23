@@ -80,27 +80,30 @@ def split_document(document, tokenizer, min_sen_len=30, max_sen_len=200):
             clean_sentences.append(sentence)
     return clean_sentences
 
-def remove_url(document):
+def replace_url(document):
     url_patterns = [
         "((http|ftp).+?(?=([^a-zA-Z&,\-!\d./?:;#%=]|$)))",
         "([a-zA-Z&,!\d\-./@?;:#%=]+?\.com.*?(?=([^a-zA-Z\d\-!&,./@?;:#%=]|$)))",
         "([a-zA-Z&,!\d\-./@?;:#%=]+?@.*?(?=([^a-zA-Z\d!\-&,./@?;:#%=]|$)))"
     ]
-    return re.sub('|'.join(url_patterns), '', document)
+    return re.sub('|'.join(url_patterns), '_url_', document)
 
-def remove_time(document):
+def replace_time(document):
     time_patterns = [
         "([0-2]\d:[0-5]\d)", "(20\d\d-{0,1}[0-1]\d-{0,1}[0-3]\d)",
         "1[0-1]\d-{0,1}[0-1]\d-{0,1}[0-3]\d"
     ]
-    return re.sub('|'.join(time_patterns), '', document)
+    return re.sub('|'.join(time_patterns), '_time_', document)
 
-def remove_phone_number(document):
+def replace_phone_number(document):
     phone_patterns = [
         "(0800-{0,1}\d\d\d-{0,1}\d\d\d)", "(02-{0,1}\d\d\d\d-{0,1}\d\d\d\d)",
         "(0[3-8]-{0,1}\d\d\d-{0,1}\d\d\d\d)", "(09\d\d-{0,1}\d\d\d-{0,1}\d\d\d)"
     ]
-    return re.sub('|'.join(phone_patterns), '', document)
+    return re.sub('|'.join(phone_patterns), '_phone_', document)
+
+def replace_number(document):
+    return re.sub(r'\d+', '_number_', document)
 
 def replace_title(document):
     document = re.sub("Mr. ", "Mr ", document)
@@ -126,17 +129,17 @@ def remove_blank(document):
     return re.sub('_{2,}', '_', document)
 
 def remove_meaning_notation(config, document):
-    if config['remove_url']:
-        document = remove_url(document)
+    if config['replace_url']:
+        document = replace_url(document)
 
     if config['remove_blank']:
         document = remove_blank(document)
 
-    if config['remove_time']:
-        document = remove_time(document)
+    if config['replace_time']:
+        document = replace_time(document)
 
-    if config['remove_phone_number']:
-        document = remove_phone_number(document)
+    if config['replace_phone_number']:
+        document = replace_phone_number(document)
 
     if config['replace_title']:
         document = replace_title(document)
@@ -146,6 +149,10 @@ def remove_meaning_notation(config, document):
 
     if config['remove_angle_brackets']:
         document = remove_angle_brackets(document)
+
+    if config['replace_number']:
+        document = replace_number(document)
+
     return document
 
 def remove_stopwords(sentence, stopwords_set):
