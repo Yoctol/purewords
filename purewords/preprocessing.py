@@ -57,7 +57,12 @@ def split_sentence(
         splitted_sentences.append(' '.join(short_sentence_list))
     return splitted_sentences
 
-def split_document(document, tokenizer, min_sen_len=30, max_sen_len=200):
+def split_document(
+        document,
+        tokenizer,
+        min_sentence_length=30,
+        max_sentence_length=200
+):
     confident_splitting_tokens = [
         '。', '\n', '\\\\n',
         '！', '\![^\w\d]',
@@ -71,11 +76,13 @@ def split_document(document, tokenizer, min_sen_len=30, max_sen_len=200):
         sentence = tokenize_sentence(sentence, tokenizer)
         sentence = re.sub(' ; ', ' ;', sentence)
         sentence_word_length = word_length(sentence)
-        if sentence_word_length < min_sen_len:
+        if sentence_word_length < min_sentence_length:
             continue
-        elif sentence_word_length > max_sen_len:
+        elif sentence_word_length > max_sentence_length:
             splitted_sentences = split_sentence(
-                sentence, min_sen_len, max_sen_len
+                sentence,
+                min_sentence_length,
+                max_sentence_length
             )
             for splitted_sentence in splitted_sentences:
                 clean_sentences.append(splitted_sentence)
