@@ -18,4 +18,4 @@ class WordReplaceFilter(BaseFilter):
                 replacement,
                 sentence
             )
-        return senten
+        return sentence
