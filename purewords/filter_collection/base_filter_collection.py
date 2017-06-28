@@ -19,7 +19,9 @@ class BaseFilterCollection(object):
     @staticmethod
     def show_process(sentence, process, verbose=False):
         if verbose:
-            print('{} : {}'.format(precess, sentence))
+            if process == 'origin':
+                print('====================================')
+            print('({}) {}'.format(precess, sentence))
 
     def __call__(self, sentence, verbose):
         self.show_process(sentence, 'origin', verbose)
