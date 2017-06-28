@@ -1,5 +1,4 @@
 '''base filter collection'''
-from abc import abstractmethod
 
 
 class BaseFilterCollection(object):
