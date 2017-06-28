@@ -24,9 +24,9 @@ class BaseFilterCollection(object):
             print('({}) {}'.format(precess, sentence))
 
     def __call__(self, sentence, verbose):
-        self.show_process(sentence, 'origin', verbose)
+        show_process(sentence, 'origin', verbose)
         for num, filter_object in self.filter_collection:
             sentence = filter_object(sentence)
-            self.show_process(sentence, '{}_{}'.format(
+            show_process(sentence, '{}_{}'.format(
                 str(num), filter_object.__class__.__name__), verbose)
         return sentence
