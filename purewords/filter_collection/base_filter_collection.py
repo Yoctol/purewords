@@ -17,13 +17,13 @@ class BaseFilterCollection(object):
         return len(self.filter_collection)
 
     @staticmethod
-    def show_process(sentence, process, verbose=False):
+    def show_process(sentence, process, verbose):
         if verbose:
             if process == 'origin':
                 print('====================================')
             print('({}) {}'.format(precess, sentence))
 
-    def __call__(self, sentence, verbose):
+    def __call__(self, sentence, verbose=False):
         show_process(sentence, 'origin', verbose)
         for num, filter_object in self.filter_collection:
             sentence = filter_object(sentence)
