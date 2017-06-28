@@ -17,9 +17,6 @@ class BaseFilterCollection(object):
         return len(self.filter_collection)
 
     def __call__(self, sentence):
-        if isinstance(sentence, str):
-            for num, filter_object in enumerate(self.filter_collection):
-                sentence = filter_object(sentence)
-            return sentence
-        else:
-            raise TypeError('sentence must be a string')
+        for num, filter_object in self.filter_collection:
+            sentence = filter_object(sentence)
+        return sentence
