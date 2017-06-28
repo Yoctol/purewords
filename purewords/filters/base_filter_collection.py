@@ -17,8 +17,7 @@ class BaseFilterCollection(object):
     def get_size(self):
         return len(self.filter_collection)
 
-    def __call__(self, sentence, verbose=3):
-        n_collection = len(self.filter_collection)
+    def __call__(self, sentence):
         if isinstance(sentence, str):
             for num, filter_object in enumerate(self.filter_collection):
                 sentence = filter_object(sentence)
