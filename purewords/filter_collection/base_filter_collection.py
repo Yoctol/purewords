@@ -16,7 +16,17 @@ class BaseFilterCollection(object):
     def get_size(self):
         return len(self.filter_collection)
 
-    def __call__(self, sentence):
+    @staticmethod
+    def show_process(sentence, process, verbose):
+        if verbose:
+            if process == 'origin':
+                print('====================================')
+            print('({}) {}'.format(precess, sentence))
+
+    def __call__(self, sentence, verbose=False):
+        show_process(sentence, 'origin', verbose)
         for num, filter_object in self.filter_collection:
             sentence = filter_object(sentence)
+            show_process(sentence, '{}_{}'.format(
+                str(num), filter_object.__class__.__name__), verbose)
         return sentence
