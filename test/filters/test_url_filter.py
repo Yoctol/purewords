@@ -8,7 +8,7 @@ class TestUrlFilterClass(TestCase):
     def setUp(self):
         self.filter = UrlFilter()
 
-    def test_remove_url(self):
+    def test_url_filter(self):
         sentence = "我們的官網是http://www.yoctol.com.tw" \
                    + "，有問題可以寄信至service@yoctol.com" \
                    + "或寄信到email@yoctol.edu.tw"
