@@ -1,12 +1,12 @@
 '''Phone filter testcases'''
 from unittest import TestCase
 
-from purewords.filters import PhoneFilter
+from purewords.filters import phone_filter
 
 class TestPhoneFilterClass(TestCase):
 
     def setUp(self):
-        self.filter = PhoneFilter
+        self.filter = phone_filter
 
     def test_phone_filter(self):
         sentence = "薄餡手機是:0912345678, " \

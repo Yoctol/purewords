@@ -1,12 +1,12 @@
 '''abbreviation filter testcases'''
 from unittest import TestCase
 
-from purewords.filters import AbbreviationFilter
+from purewords.filters import abbreviation_filter
 
 class TestAbbreviationFilter(TestCase):
 
     def setUp(self):
-        self.filter = AbbreviationFilter
+        self.filter = abbreviation_filter
 
     def test_abbreviation_filter(self):
         sentence = "I'm Mr. Qoo. She's Mrs. M. " \

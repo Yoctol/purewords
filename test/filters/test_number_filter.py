@@ -1,12 +1,12 @@
 '''Number filter testcase'''
 from unittest import TestCase
 
-from purewords.filters import NumberFilter
+from purewords.filters import number_filter
 
 class TestNumberFilterClass(TestCase):
 
     def setUp(self):
-        self.filter = NumberFilter
+        self.filter = number_filter
 
     def test_number_filter(self):
         sentence = '我要喝八冰綠，一共25元'
