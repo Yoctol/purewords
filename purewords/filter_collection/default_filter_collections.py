@@ -6,7 +6,7 @@ from purewords.filters import time_filter
 from purewords.filters import phone_filter
 from purewords.filters import title_filter
 from purewords.filters import abbreviation_filter
-from purewords.filters import angleBrackets_filter
+from purewords.filters import angle_brackets_filter
 from purewords.filters import blank_filter
 from purewords.filters import number_filter
 
