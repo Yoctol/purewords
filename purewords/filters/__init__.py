@@ -34,9 +34,9 @@ PhoneFilter = PatternReplaceFilter(
 
 TitleFilter = WordReplaceFilter(
     replace_dictionary={
-        "Mr. ":"Mr ",
-        "Mrs. ":"Mrs ",
-        "Ms. ":"Ms ",
+        "Mr\. ":"Mr ",
+        "Mrs\. ":"Mrs ",
+        "Ms\. ":"Ms ",
         "ma'am":"madam"
     }
 )
