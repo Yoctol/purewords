@@ -6,7 +6,7 @@ from purewords.filters import TitleFilter
 class TestTitleFilterClass(TestCase):
 
     def setUp(self):
-        self.filter = TitleFilter()
+        self.filter = TitleFilter
 
     def test_title_filter(self):
         sentence = "I'm Mr. Qoo. She's Mrs. M. " \

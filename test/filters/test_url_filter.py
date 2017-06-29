@@ -6,7 +6,7 @@ from purewords.filters import UrlFilter
 class TestUrlFilterClass(TestCase):
 
     def setUp(self):
-        self.filter = UrlFilter()
+        self.filter = UrlFilter
 
     def test_url_filter(self):
         sentence = "我們的官網是http://www.yoctol.com.tw" \

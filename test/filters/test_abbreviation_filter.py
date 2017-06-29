@@ -6,7 +6,7 @@ from purewords.filters import AbbreviationFilter
 class TestAbbreviationFilter(TestCase):
 
     def setUp(self):
-        self.filter = AbbreviationFilter()
+        self.filter = AbbreviationFilter
 
     def test_abbreviation_filter(self):
         sentence = "I'm Mr. Qoo. She's Mrs. M. " \

@@ -6,7 +6,7 @@ from purewords.filters import TimeFilter
 class TestTimeFilterClass(TestCase):
 
     def setUp(self):
-        self.filter = TimeFilter()
+        self.filter = TimeFilter
 
     def test_time_filter(self):
         sentence = "今天是2018-02-30日，" \

@@ -6,7 +6,7 @@ from purewords.filters import PhoneFilter
 class TestPhoneFilterClass(TestCase):
 
     def setUp(self):
-        self.filter = PhoneFilter()
+        self.filter = PhoneFilter
 
     def test_phone_filter(self):
         sentence = "薄餡手機是:0912345678, " \
