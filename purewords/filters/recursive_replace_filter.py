@@ -9,7 +9,7 @@ class RecursiveReplaceFilter(BaseFilter):
         self.pattern = pattern
         self.replacement = replacement
 
-    def __call_(self, sentence):
+    def __call__(self, sentence):
         while re.search(self.pattern, sentence) is not None:
             sentence = re.sub(
                 self.pattern,
