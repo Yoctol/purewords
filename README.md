@@ -37,7 +37,7 @@ Purewords is a package used to clean raw texts for all languages.
   ```python
   # result: list of cleaned string
   purewords.clean_document(inputs)
-  ['ha hi', 'hello i am at _num_', 'you know yahoo', 'my computer is great', 'my phone number is _phone_', '的 my password _num_ abc _num_ y y']
+  ['ha hi', 'hello i am at _url_', 'you know yahoo', 'my computer is great', 'my phone number is _phone_', '的 my password _num_ abc _num_ y y']
   ```
 
   ### Customed your purewords
@@ -47,8 +47,8 @@ Purewords is a package used to clean raw texts for all languages.
   ```python
   import purewords
   from purewords.tokenizer import YoctolTokenizer
-  from .filter_collection import document_filters
-  from .filter_collection import token_filters
+  from purewords.filter_collection import document_filters
+  from purewords.filter_collection import token_filters
   
   tokenizer = YoctolTokenizer()
   pw = purewords.PureWords(
@@ -122,7 +122,12 @@ Purewords is a package used to clean raw texts for all languages.
   custom_filters.add(filter_1)
   custom_filters.add(filter_2)
   ...
-  custom_filters.add(filter_3)
+  custom_filters.add(filter_n)
+  
+  pw = purewords.PureWords(
+      tokenizer=tokenizer,
+      document_filters=custom_filters,
+  )
   ```
 
   ### Command line usage:
