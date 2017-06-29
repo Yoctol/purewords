@@ -8,3 +8,17 @@ from .phone_filter import PhoneFilter
 from .stopwords_filter import StopwordsFilter
 from .title_filter import TitleFilter
 from .abbreviation_filter import AbbreviationFilter
+
+NumberFilter = PatternReplaceFilter(
+    patterns=['\d+'],
+    replacement='_num_'
+)
+
+AngleBracketsFilter = RecursiveReplaceFilter(
+    pattern="<[^<>]*?>",
+)
+
+BlankFilter = PatternReplaceFilter(
+    patterns=['_{2,}'],
+    replacement='_'
+)
