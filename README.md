@@ -28,7 +28,7 @@ Purewords is a package used to clean raw texts for all languages.
   ```python
   # result: string
   purewords.clean_sentence(inputs)
-  'ha hi hello i am at you know yahoo my computer is great my phone number is 的 my password 123 abc 99 y y'
+  'ha hi hello i am at _url_ you know yahoo my computer is great my phone number is _phone_ 的 my password _num_ abc _num_ y y'
   ```
   
   #### Treat inputs as a document and clean it.
@@ -37,7 +37,7 @@ Purewords is a package used to clean raw texts for all languages.
   ```python
   # result: list of cleaned string
   purewords.clean_document(inputs)
-  ['ha hi', 'hello i am at', 'you know yahoo', 'my computer is great', 'my phone number is', '的 my password 123 abc 99 y y']
+  ['ha hi', 'hello i am at _num_', 'you know yahoo', 'my computer is great', 'my phone number is _phone_', '的 my password _num_ abc _num_ y y']
   ```
 
   ### Customed your purewords
@@ -47,17 +47,14 @@ Purewords is a package used to clean raw texts for all languages.
   ```python
   import purewords
   from purewords.tokenizer import YoctolTokenizer
+  from .filter_collection import document_filters
+  from .filter_collection import token_filters
   
   tokenizer = YoctolTokenizer()
   pw = purewords.PureWords(
       tokenizer=tokenizer, # select your tokenizer
-      remove_url=True, 
-      remove_time=True, # remove time such as 20170101
-      remove_phone_number=True, 
-      replace_title=True, # replace "Mr." with "Mr" for example
-      remove_blank=True, # remove blank _____ 
-      replace_abbreviation=True, # replace "I'd" with "I would" for example
-      remove_angle_brackets=True,
+      document_filters=document_filters, # select your document filters
+      token_filters=token_filters, # select your token filters
       stopwords_path='configs/stopwords.txt', # setup your customed stopwords 
       max_len=200, # cut long sentence whose length exceed max_len
       min_len=1 # ignore short sentence 
@@ -69,10 +66,14 @@ Purewords is a package used to clean raw texts for all languages.
   pw.clean_document(inputs)
   ```
 
-  #### Select your tokenizer in purewords
+  #### Tokenizer
+
+  ##### Select your tokenizer in purewords
 
   You can select `WhitespaceTokenizer` tokenizer if you prefer tokenize 
   sentences with whitespace or `JiebaTokenizer` for default jieba setting.
+  
+  Otherwise, we use yoctol jeiba tokenizer as our default setting.
   
   ```python
   from purewords.tokenizer import WhitespaceTokenizer
@@ -83,7 +84,7 @@ Purewords is a package used to clean raw texts for all languages.
   )
   ```
 
-  #### Add new words in JiebaTokenizer
+  ##### Add new words in JiebaTokenizer
 
   You can add new word in JiebaTokenizer to customize your tokenizer.
 
@@ -97,6 +98,31 @@ Purewords is a package used to clean raw texts for all languages.
   pw = purewords.PureWords(
       tokenizer=tokenizer
   )
+  ```
+  
+  #### Filter collection
+  
+  You can customize your preprocesing ways in purewords.
+  
+  * document_filters: preprocess the raw sentence before sentence splitting
+  * token_filters: preprocess tokens after tokenization of each sentence
+  
+  ##### Organize your filters
+  
+  You can create your customized filters by adding your filters in our filter collection class.
+  
+  Filter means a callable object which receives a raw sentence and returns the processed one.
+  
+  The preprocessing order is consistent with the adding order of filters.
+  
+  ```python
+  from purewords.filter_collection import BaseFilterCollection
+  
+  custom_filters = BaseFilterCollection()
+  custom_filters.add(filter_1)
+  custom_filters.add(filter_2)
+  ...
+  custom_filters.add(filter_3)
   ```
 
   ### Command line usage:
