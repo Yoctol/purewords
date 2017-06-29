@@ -1,12 +1,12 @@
 '''Time filter testcase'''
 from unittest import TestCase
 
-from purewords.filters import TimeFilter
+from purewords.filters import time_filter
 
 class TestTimeFilterClass(TestCase):
 
     def setUp(self):
-        self.filter = TimeFilter
+        self.filter = time_filter
 
     def test_time_filter(self):
         sentence = "今天是2018-02-30日，" \

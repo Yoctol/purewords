@@ -1,12 +1,12 @@
 '''Title filter testcases'''
 from unittest import TestCase
 
-from purewords.filters import TitleFilter
+from purewords.filters import title_filter
 
 class TestTitleFilterClass(TestCase):
 
     def setUp(self):
-        self.filter = TitleFilter
+        self.filter = title_filter
 
     def test_title_filter(self):
         sentence = "I'm Mr. Qoo. She's Mrs. M. " \

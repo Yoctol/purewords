@@ -4,7 +4,7 @@ from .word_replace_filter import WordReplaceFilter
 
 from .stopwords_filter import StopwordsFilter
 
-UrlFilter = PatternReplaceFilter(
+url_filter = PatternReplaceFilter(
     patterns=[
         "((http|ftp).+?(?=([^a-zA-Z&,\-!\d./?:;#%=]|$)))",
         "([a-zA-Z&,!\d\-./@?;:#%=]+?\.com.*?(?=([^a-zA-Z\d\-!&,./@?;:#%=]|$)))",
@@ -13,7 +13,7 @@ UrlFilter = PatternReplaceFilter(
     replacement='_url_'
 )
 
-TimeFilter = PatternReplaceFilter(
+time_filter = PatternReplaceFilter(
     patterns=[
         "([0-2]\d:[0-5]\d)",
         "(20\d\d-{0,1}[0-1]\d-{0,1}[0-3]\d)",
@@ -22,7 +22,7 @@ TimeFilter = PatternReplaceFilter(
     replacement='_time_'
 )
 
-PhoneFilter = PatternReplaceFilter(
+phone_filter = PatternReplaceFilter(
     patterns=[
         "(0800-{0,1}\d\d\d-{0,1}\d\d\d)",
         "(02-{0,1}\d\d\d\d-{0,1}\d\d\d\d)",
@@ -32,7 +32,7 @@ PhoneFilter = PatternReplaceFilter(
     replacement='_phone_'
 )
 
-TitleFilter = WordReplaceFilter(
+title_filter = WordReplaceFilter(
     replace_dictionary={
         "Mr\. ":"Mr ",
         "Mrs\. ":"Mrs ",
@@ -41,7 +41,7 @@ TitleFilter = WordReplaceFilter(
     }
 )
 
-AbbreviationFilter = WordReplaceFilter(
+abbreviation_filter = WordReplaceFilter(
     replace_dictionary={
         "I'm ":"I am ",
         "(Y|y)ou're ":"you are ",
@@ -51,16 +51,16 @@ AbbreviationFilter = WordReplaceFilter(
     }
 )
 
-NumberFilter = PatternReplaceFilter(
+number_filter = PatternReplaceFilter(
     patterns=['\d+'],
     replacement='_num_'
 )
 
-AngleBracketsFilter = RecursiveReplaceFilter(
+angle_brackets_filter = RecursiveReplaceFilter(
     pattern="<[^<>]*?>",
 )
 
-BlankFilter = PatternReplaceFilter(
+blank_filter = PatternReplaceFilter(
     patterns=['_{2,}'],
     replacement='_'
 )

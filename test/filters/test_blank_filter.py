@@ -1,12 +1,12 @@
 '''Blank filter testcase'''
 from unittest import TestCase
 
-from purewords.filters import BlankFilter
+from purewords.filters import blank_filter
 
 class TestBlankFilterClass(TestCase):
 
     def setUp(self):
-        self.filter = BlankFilter
+        self.filter = blank_filter
 
     def test_blank_filter(self):
         sentence = 'Hello I am ______ blank!!'
