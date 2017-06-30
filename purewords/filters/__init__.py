@@ -64,3 +64,8 @@ blank_filter = PatternReplaceFilter(
     patterns=['_{2,}'],
     replacement='_'
 )
+
+token_number_filter = PatternReplaceFilter(
+    patterns=['^\d+$'],
+    replacement='_num_'
+)
