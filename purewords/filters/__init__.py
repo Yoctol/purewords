@@ -52,7 +52,7 @@ abbreviation_filter = WordReplaceFilter(
 )
 
 number_filter = PatternReplaceFilter(
-    patterns=['\d+'],
+    patterns=['^\d+$'],
     replacement='_num_'
 )
 

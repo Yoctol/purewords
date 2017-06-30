@@ -11,14 +11,17 @@ def tokenize_sentence_and_filte_tokens(
         token_filters
 ):
     tokenized_text_lst = tokenizer.cut(text_str)
+    filted_tokens = []
     for token in tokenized_text_lst:
-        token = token_filters(token)
+        filted_tokens.append(
+            token_filters(token)
+        )
 
-    while ' ' in tokenized_text_lst:
-        tokenized_text_lst.remove(' ')
-    while '' in tokenized_text_lst:
-        tokenized_text_lst.remove('')
-    return ' '.join(tokenized_text_lst)
+    while ' ' in filted_tokens:
+        filted_tokens.remove(' ')
+    while '' in filted_tokens:
+        filted_tokens.remove('')
+    return ' '.join(filted_tokens)
 
 def set_sentence_splitting_token(sentence):
     sentence = re.sub('[^\w\d ]', ';', sentence)
