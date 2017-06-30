@@ -21,7 +21,7 @@ class JiebaTokenizer(BaseTokenizer):
 
         specific_tokens = [
             '_url_',
-            '_number_',
+            '_num_',
             '_phone_',
             '_time_'
         ]

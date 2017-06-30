@@ -4,6 +4,8 @@ import os.path
 from joblib import Parallel, delayed
 
 import purewords
+from purewords.filter_collection import document_filters
+from purewords.filter_collection import token_filters
 
 def parse():
     parser = argparse.ArgumentParser(
@@ -76,18 +78,19 @@ def generate_tokenized_corpus(args, input_file_path, out_file):
     batch_size = args.job_number * args.batch_size
     processed_number = 0
 
-    customed_purewords = purewords.PureWords(
-        min_len=args.min_len,
-        max_len=args.max_len
-    )
-
     print('processing ' + os.path.basename(input_file_path) + '...')
     info = ""
 
     for raw_document_list in sentences_generator(input_file_path, batch_size):
         corpus = Parallel(n_jobs=args.job_number, verbose=args.verbose)(
-            delayed(customed_purewords.clean_document)
-            (document) for document in raw_document_list
+            delayed(purewords.static_clean_document)
+            (
+                document,
+                document_filters,
+                token_filters,
+                args.min_len,
+                args.max_len
+            ) for document in raw_document_list
         )
 
         return_info = ""
