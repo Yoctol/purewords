@@ -12,7 +12,7 @@ setup(
     description="A NLP preprocessing package",
     license="MIT",
     author="EN, PLLiao",
-    packages=['purewords'],
+    packages=find_packages(),
     package_dir={'purewords':'purewords'},
     package_data={'purewords':['*.*','tokenizer/*', 'configs/*']},
     install_requires=[],
