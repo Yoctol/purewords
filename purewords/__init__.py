@@ -38,6 +38,8 @@ class PureWords(object):
             self.min_len,
             self.max_len
         )
+        while '' in sentences:
+            sentences.remove('')
         return sentences
 
 def static_clean_document(
@@ -55,6 +57,8 @@ def static_clean_document(
         min_len,
         max_len
     )
+    while '' in sentences:
+        sentences.remove('')
     return sentences
 
 pure_words = PureWords()
