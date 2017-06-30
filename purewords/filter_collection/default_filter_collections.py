@@ -9,6 +9,7 @@ from purewords.filters import abbreviation_filter
 from purewords.filters import angle_brackets_filter
 from purewords.filters import blank_filter
 from purewords.filters import number_filter
+from purewords.filters import token_number_filter
 
 document_filters = BaseFilterCollection()
 document_filters.add(url_filter)
@@ -20,4 +21,4 @@ document_filters.add(abbreviation_filter)
 document_filters.add(angle_brackets_filter)
 
 token_filters = BaseFilterCollection()
-token_filters.add(number_filter)
+token_filters.add(token_number_filter)

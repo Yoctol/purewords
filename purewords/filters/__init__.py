@@ -52,7 +52,7 @@ abbreviation_filter = WordReplaceFilter(
 )
 
 number_filter = PatternReplaceFilter(
-    patterns=['^\d+$'],
+    patterns=['\d+'],
     replacement='_num_'
 )
 
@@ -63,4 +63,9 @@ angle_brackets_filter = RecursiveReplaceFilter(
 blank_filter = PatternReplaceFilter(
     patterns=['_{2,}'],
     replacement='_'
+)
+
+token_number_filter = PatternReplaceFilter(
+    patterns=['^\d+$'],
+    replacement='_num_'
 )
