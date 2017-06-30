@@ -55,7 +55,6 @@ Purewords is a package used to clean raw texts for all languages.
       tokenizer=tokenizer, # select your tokenizer
       document_filters=document_filters, # select your document filters
       token_filters=token_filters, # select your token filters
-      stopwords_path='configs/stopwords.txt', # setup your customed stopwords 
       max_len=200, # cut long sentence whose length exceed max_len
       min_len=1 # ignore short sentence 
   )
@@ -129,6 +128,11 @@ Purewords is a package used to clean raw texts for all languages.
       document_filters=custom_filters,
   )
   ```
+  
+  #### Stopwords
+  
+  You can add stopwords in `purewords/config/stopwords.txt`.
+
 
   ### Command line usage:
   
