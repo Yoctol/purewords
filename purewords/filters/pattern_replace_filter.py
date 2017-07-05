@@ -58,7 +58,6 @@ class PatternReplaceFilter(BaseFilter):
                     sentence = (sentence[: m.start(0) + shift] +
                                 match +
                                 sentence[m.end(0) + shift:])
-                    # sentence[m.start(0) + shift: m.end(0) + shift] = match
                     sentence_copy = sentence_copy[m.end(0):]
                     shift += m.end(0)
                 else:
