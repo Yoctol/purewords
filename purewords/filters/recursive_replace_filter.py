@@ -3,6 +3,7 @@ import re
 
 from .base_filter import BaseFilter
 
+
 class RecursiveReplaceFilter(BaseFilter):
 
     def __init__(self, pattern='', replacement=''):

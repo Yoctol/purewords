@@ -3,6 +3,7 @@ import re
 
 from .base_filter import BaseFilter
 
+
 class WordReplaceFilter(BaseFilter):
 
     def __init__(self, replace_dictionary={}):

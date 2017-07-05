@@ -1,6 +1,7 @@
 '''Stopwords filter'''
 from .pattern_replace_filter import PatternReplaceFilter
 
+
 class StopwordsFilter(PatternReplaceFilter):
 
     def __init__(self, stopwords_set):
