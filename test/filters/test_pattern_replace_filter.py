@@ -19,8 +19,8 @@ class TestPatternReplaceFilterClass(TestCase):
         pattern = '\d+'
         self.filter_.add_pattern(pattern)
         self.assertEqual(
-            self.filter_.patterns[-1],
-            pattern
+            set(self.filter_.patterns),
+            set(['A'] + [pattern])
         )
 
     def test_store_matches_of_pattern(self):
