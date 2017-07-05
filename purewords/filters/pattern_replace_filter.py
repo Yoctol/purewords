@@ -6,12 +6,12 @@ from .base_filter import BaseFilter
 class PatternReplaceFilter(BaseFilter):
 
     def __init__(self, patterns=[], replacement=''):
-        # if isinstance(patterns, list) and isinstance(replacement, str):
-        self.patterns = patterns
-        self.replacement = replacement
-        # else:
-        #     raise TypeError(
-        #         'patterns must be a list, replacement must be a string.')
+        if isinstance(patterns, list) and isinstance(replacement, str):
+            self.patterns = patterns
+            self.replacement = replacement
+        else:
+            raise TypeError(
+                'patterns must be a list, replacement must be a string.')
 
     def add_pattern(self, pattern):
         self.patterns.append(pattern)
