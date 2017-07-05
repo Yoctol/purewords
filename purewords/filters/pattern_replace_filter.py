@@ -6,11 +6,16 @@ from .base_filter import BaseFilter
 class PatternReplaceFilter(BaseFilter):
 
     def __init__(self, patterns=[], replacement=''):
+        # if isinstance(patterns, list) and isinstance(replacement, str):
         self.patterns = patterns
         self.replacement = replacement
+        # else:
+        #     raise TypeError(
+        #         'patterns must be a list, replacement must be a string.')
 
     def add_pattern(self, pattern):
         self.patterns.append(pattern)
+        # self.patterns = list(set(self.patterns))
 
     @staticmethod
     def show_process(from_item, to_item, verbose):
@@ -50,7 +55,10 @@ class PatternReplaceFilter(BaseFilter):
                     PatternReplaceFilter.show_process(
                         sentence[m.start(0) + shift: m.end(0) + shift],
                         match, verbose)
-                    sentence[m.start(0) + shift: m.end(0) + shift] = match
+                    sentence = (sentence[: m.start(0) + shift] +
+                                match +
+                                sentence[m.end(0) + shift:])
+                    # sentence[m.start(0) + shift: m.end(0) + shift] = match
                     sentence_copy = sentence_copy[m.end(0):]
                     shift += m.end(0)
                 else:
