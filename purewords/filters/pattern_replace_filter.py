@@ -32,7 +32,7 @@ class PatternReplaceFilter(BaseFilter):
     def go_forward(self, sentence, verbose):
         self.store_matches_of_pattern(sentence, verbose)
         output_sentence = self.do_replacement(sentence)
-        show_process(sentence, output_sentence, verbose)
+        PatternReplaceFilter.show_process(sentence, output_sentence, verbose)
         self.forward = True
         return output_sentence
 
@@ -47,7 +47,7 @@ class PatternReplaceFilter(BaseFilter):
             for match in self.matches:
                 m = re.search(self.replacement, sentence_copy)
                 if m is not None:
-                    show_process(
+                    PatternReplaceFilter.show_process(
                         sentence[m.start(0) + shift: m.end(0) + shift],
                         match, verbose)
                     sentence[m.start(0) + shift: m.end(0) + shift] = match
@@ -60,12 +60,13 @@ class PatternReplaceFilter(BaseFilter):
             matches_copy = self.matches
             for idx, token in enumerate(sentence):
                 if token == self.replacement:
-                    show_process(sentence[idx], matches_copy[0], verbose)
+                    PatternReplaceFilter.show_process(
+                        sentence[idx], matches_copy[0], verbose)
                     sentence[idx] = matches_copy[0]
                     matches_copy = matches_copy[1:]
         return sentence
 
-    def __call__(self, sentence, invertible, mode='forward', verbose=True):
+    def __call__(self, sentence, invertible=False, mode='forward', verbose=False):
         if invertible is True:
             if mode == 'forward':
                 return self.go_forward(sentence, verbose)
