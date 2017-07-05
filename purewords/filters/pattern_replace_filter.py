@@ -15,7 +15,7 @@ class PatternReplaceFilter(BaseFilter):
 
     def add_pattern(self, pattern):
         self.patterns.append(pattern)
-        # self.patterns = list(set(self.patterns))
+        self.patterns = list(set(self.patterns))
 
     @staticmethod
     def show_process(from_item, to_item, verbose):
