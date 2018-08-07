@@ -8,16 +8,17 @@ from .filter_collection import token_filters
 
 yoctol_tokenizer = YoctolTokenizer()
 
+
 class PureWords(object):
 
     def __init__(
-            self,
-            tokenizer=yoctol_tokenizer,
-            document_filters=document_filters,
-            token_filters=token_filters,
-            max_len=200,
-            min_len=1
-        ):
+        self,
+        tokenizer=yoctol_tokenizer,
+        document_filters=document_filters,
+        token_filters=token_filters,
+        max_len=200,
+        min_len=1,
+    ):
         self.max_len = max_len
         self.min_len = min_len
 
@@ -30,7 +31,8 @@ class PureWords(object):
         return ' '.join(sentences)
 
     def clean_document(self, document):
-        document = self.document_filters(document)
+        if self.document_filters is not None:
+            document = self.document_filters(document)
         sentences = split_document(
             document,
             self.tokenizer,
@@ -42,13 +44,14 @@ class PureWords(object):
             sentences.remove('')
         return sentences
 
+
 def static_clean_document(
-    document,
-    document_filters,
-    token_filters,
-    min_len,
-    max_len
-):
+        document,
+        document_filters,
+        token_filters,
+        min_len,
+        max_len
+    ):
     document = document_filters(document)
     sentences = split_document(
         document,

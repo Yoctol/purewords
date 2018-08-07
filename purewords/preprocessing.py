@@ -2,26 +2,34 @@
 
 import re
 
+
 def word_length(sentence):
     return sentence.count(' ') + 1
+
 
 def tokenize_sentence_and_filte_tokens(
         text_str,
         tokenizer,
-        token_filters
-):
+        token_filters=None,
+    ):
+
     tokenized_text_lst = tokenizer.cut(text_str)
-    filted_tokens = []
-    for token in tokenized_text_lst:
-        filted_tokens.append(
-            token_filters(token)
-        )
+    if token_filters is not None:
+        filted_tokens = []
+        for token in tokenized_text_lst:
+            filted_tokens.append(
+                token_filters(token)
+            )
+    else:
+        filted_tokens = tokenized_text_lst
 
     while ' ' in filted_tokens:
         filted_tokens.remove(' ')
     while '' in filted_tokens:
         filted_tokens.remove('')
+
     return ' '.join(filted_tokens)
+
 
 def set_sentence_splitting_token(sentence):
     sentence = re.sub('[^\w\d ]', ';', sentence)
@@ -31,17 +39,19 @@ def set_sentence_splitting_token(sentence):
     sentence = re.sub('^ +| +$', '', sentence)
     return sentence.lower()
 
+
 def clean_sentence_splitting_token(sentence):
     sentence = re.sub(';', ' ', sentence)
     sentence = re.sub(' +', ' ', sentence)
     sentence = re.sub('^ +| +$', '', sentence)
     return sentence.lower()
 
+
 def split_sentence(
         sentence,
         min_sentence_length=30,
-        max_sentence_length=200
-):
+        max_sentence_length=200,
+    ):
     splitted_sentences = []
     sentence = re.sub(' ;', ';', sentence)
     short_sentences = sentence.split(';')
@@ -67,13 +77,14 @@ def split_sentence(
         splitted_sentences.append(' '.join(short_sentence_list))
     return splitted_sentences
 
+
 def split_document(
         document,
         tokenizer,
         token_filters,
         min_sentence_length=30,
-        max_sentence_length=200
-):
+        max_sentence_length=200,
+    ):
     confident_splitting_tokens = [
         '。', '\n', '\\\\n',
         '！', '\![^\w\d]',
