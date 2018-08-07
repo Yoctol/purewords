@@ -4,12 +4,13 @@ from unittest.mock import patch
 
 from purewords.filters import WordReplaceFilter
 
+
 class TestWordReplaceFilterClass(TestCase):
 
     def setUp(self):
         self.replace_dictionary = {
-            'A':'a',
-            'B':'b'
+            'A': 'a',
+            'B': 'b'
         }
         self.filter = WordReplaceFilter(self.replace_dictionary)
 

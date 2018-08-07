@@ -7,11 +7,12 @@ import purewords
 from purewords.filter_collection import document_filters
 from purewords.filter_collection import token_filters
 
+
 def parse():
     parser = argparse.ArgumentParser(
         description=(
-            'Purewords command line interface\n'
-            + 'Clean text from files.'),
+            'Purewords command line interface\n' +
+            'Clean text from files.'),
         usage='python -m purewords input_file_path',
         formatter_class=argparse.RawTextHelpFormatter
     )
@@ -38,6 +39,7 @@ def parse():
     parser.add_argument('input_path', type=str, help="data file path")
     return parser.parse_args()
 
+
 def sentences_generator(file_path, batch_size):
     sentences = []
     with open(file_path, 'rb') as f:
@@ -53,6 +55,7 @@ def sentences_generator(file_path, batch_size):
             yield sentences
     f.close()
 
+
 def main():
     args = parse()
 
@@ -62,7 +65,8 @@ def main():
         textfile_paths = [args.input_path]
 
     if args.output is None:
-        output_path = os.path.basename(args.input_path) + '_tokenized_corpus.txt'
+        output_path = os.path.basename(
+            args.input_path) + '_tokenized_corpus.txt'
     else:
         output_path = args.output
 
@@ -72,6 +76,7 @@ def main():
         generate_tokenized_corpus(args, textfile, out_file)
 
     out_file.close()
+
 
 def generate_tokenized_corpus(args, input_file_path, out_file):
 
@@ -108,6 +113,7 @@ def generate_tokenized_corpus(args, input_file_path, out_file):
                 out_file.write(sentence.encode('utf-8') + b'\n')
 
     print('\nprocessing ' + os.path.basename(input_file_path) + ' completed')
+
 
 if __name__ == '__main__':
     main()

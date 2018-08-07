@@ -3,6 +3,7 @@ from unittest import TestCase
 
 from purewords.filters import time_filter
 
+
 class TestTimeFilterClass(TestCase):
 
     def setUp(self):

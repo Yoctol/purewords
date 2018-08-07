@@ -4,6 +4,7 @@ from unittest.mock import patch
 
 from purewords.tokenizer import JiebaTokenizer
 
+
 class TestJiebaTokenizerClass(TestCase):
 
     def setUp(self):

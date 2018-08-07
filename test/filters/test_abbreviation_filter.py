@@ -3,6 +3,7 @@ from unittest import TestCase
 
 from purewords.filters import abbreviation_filter
 
+
 class TestAbbreviationFilter(TestCase):
 
     def setUp(self):

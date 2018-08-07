@@ -8,16 +8,16 @@ except IOError:
 
 setup(
     name="purewords",
-    version="0.1.0",
+    version="0.1.1",
     description="A NLP preprocessing package",
     license="MIT",
     author="EN, PLLiao",
     python_requires='>=3.5',
     packages=find_packages(),
-    package_dir={'purewords':'purewords'},
-    package_data={'purewords':['*.*','tokenizer/*', 'configs/*']},
+    package_dir={'purewords': 'purewords'},
+    package_data={'purewords': ['*.*', 'tokenizer/*', 'configs/*']},
     install_requires=[
-        'jieba==0.39'
+        'jieba==0.39',
         'joblib==0.12.2',
     ],
     long_description=long_description,

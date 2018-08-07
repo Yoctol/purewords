@@ -4,6 +4,7 @@ from jieba import Tokenizer, setLogLevel
 
 from .base_tokenizer import BaseTokenizer
 
+
 class JiebaTokenizer(BaseTokenizer):
 
     def __init__(self):

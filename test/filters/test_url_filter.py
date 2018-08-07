@@ -3,6 +3,7 @@ from unittest import TestCase
 
 from purewords.filters import url_filter
 
+
 class TestUrlFilterClass(TestCase):
 
     def setUp(self):

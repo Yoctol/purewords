@@ -3,6 +3,7 @@ from unittest import TestCase
 
 from purewords.filters import RecursiveReplaceFilter
 
+
 class TestRecursiveReplaceFilterClass(TestCase):
 
     def setUp(self):

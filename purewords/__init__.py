@@ -1,5 +1,3 @@
-import importlib
-
 from .preprocessing import split_document
 from .tokenizer import YoctolTokenizer
 
@@ -7,6 +5,7 @@ from .filter_collection import document_filters
 from .filter_collection import token_filters
 
 yoctol_tokenizer = YoctolTokenizer()
+
 
 class PureWords(object):
 
@@ -16,7 +15,7 @@ class PureWords(object):
             document_filters=document_filters,
             token_filters=token_filters,
             max_len=200,
-            min_len=1
+            min_len=1,
         ):
         self.max_len = max_len
         self.min_len = min_len
@@ -42,13 +41,14 @@ class PureWords(object):
             sentences.remove('')
         return sentences
 
+
 def static_clean_document(
-    document,
-    document_filters,
-    token_filters,
-    min_len,
-    max_len
-):
+        document,
+        document_filters,
+        token_filters,
+        min_len,
+        max_len
+    ):
     document = document_filters(document)
     sentences = split_document(
         document,
@@ -60,6 +60,7 @@ def static_clean_document(
     while '' in sentences:
         sentences.remove('')
     return sentences
+
 
 pure_words = PureWords()
 
