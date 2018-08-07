@@ -10,7 +10,6 @@ from purewords.filters import title_filter
 from purewords.filters import abbreviation_filter
 from purewords.filters import angle_brackets_filter
 from purewords.filters import blank_filter
-from purewords.filters import number_filter
 from purewords.filters import token_number_filter
 from purewords.filters import StopwordsFilter
 

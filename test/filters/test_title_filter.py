@@ -3,6 +3,7 @@ from unittest import TestCase
 
 from purewords.filters import title_filter
 
+
 class TestTitleFilterClass(TestCase):
 
     def setUp(self):

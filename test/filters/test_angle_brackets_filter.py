@@ -3,6 +3,7 @@ from unittest import TestCase
 
 from purewords.filters import angle_brackets_filter
 
+
 class TestAngleBracketsFilterClass(TestCase):
 
     def setUp(self):

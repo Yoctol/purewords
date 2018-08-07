@@ -3,6 +3,7 @@ from unittest import TestCase
 
 from purewords.filters import StopwordsFilter
 
+
 class TestStopwordsFilter(TestCase):
 
     def setUp(self):

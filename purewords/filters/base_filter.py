@@ -1,6 +1,7 @@
 '''base filter'''
 from abc import abstractmethod
 
+
 class BaseFilter(object):
 
     @abstractmethod

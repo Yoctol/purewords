@@ -4,6 +4,7 @@ from unittest.mock import patch
 
 from purewords.filters import PatternReplaceFilter
 
+
 class TestPatternReplaceFilterClass(TestCase):
 
     def setUp(self):

@@ -1,8 +1,8 @@
-from .pattern_replace_filter import PatternReplaceFilter
-from .recursive_replace_filter import RecursiveReplaceFilter
-from .word_replace_filter import WordReplaceFilter
+from .pattern_replace_filter import PatternReplaceFilter  # noqa
+from .recursive_replace_filter import RecursiveReplaceFilter  # noqa
+from .word_replace_filter import WordReplaceFilter  # noqa
+from .stopwords_filter import StopwordsFilter  # noqa
 
-from .stopwords_filter import StopwordsFilter
 
 url_filter = PatternReplaceFilter(
     patterns=[
@@ -34,20 +34,20 @@ phone_filter = PatternReplaceFilter(
 
 title_filter = WordReplaceFilter(
     replace_dictionary={
-        "Mr\. ":"Mr ",
-        "Mrs\. ":"Mrs ",
-        "Ms\. ":"Ms ",
-        "ma'am":"madam"
+        "Mr\. ": "Mr ",
+        "Mrs\. ": "Mrs ",
+        "Ms\. ": "Ms ",
+        "ma'am": "madam"
     }
 )
 
 abbreviation_filter = WordReplaceFilter(
     replace_dictionary={
-        "I'm ":"I am ",
-        "(Y|y)ou're ":"you are ",
-        "'s ":" ",
-        "'ll |’ll ":" will ",
-        "'d |’d ":" would "
+        "I'm ": "I am ",
+        "(Y|y)ou're ": "you are ",
+        "'s ": " ",
+        "'ll |’ll ": " will ",
+        "'d |’d ": " would "
     }
 )
 

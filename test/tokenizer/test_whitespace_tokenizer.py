@@ -2,6 +2,7 @@ import unittest
 
 from purewords.tokenizer import WhitespaceTokenizer
 
+
 class TestWhiteSpaceTokenizer(unittest.TestCase):
 
     def setUp(self):

@@ -4,11 +4,8 @@ Purewords is a package used to clean raw texts for all languages.
 
 ## Install
 
-   `python setup.py install`
+   `pip install purewords`
 
-## Test
-
-   `python setup.py test`
 
 ## Usage
 

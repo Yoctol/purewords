@@ -1,6 +1,7 @@
 '''base tokenizer'''
 from abc import abstractmethod
 
+
 class BaseTokenizer(object):
 
     @abstractmethod

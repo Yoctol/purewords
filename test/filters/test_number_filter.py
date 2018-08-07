@@ -3,6 +3,7 @@ from unittest import TestCase
 
 from purewords.filters import number_filter
 
+
 class TestNumberFilterClass(TestCase):
 
     def setUp(self):

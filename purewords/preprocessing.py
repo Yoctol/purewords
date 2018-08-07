@@ -2,14 +2,16 @@
 
 import re
 
+
 def word_length(sentence):
     return sentence.count(' ') + 1
+
 
 def tokenize_sentence_and_filte_tokens(
         text_str,
         tokenizer,
-        token_filters
-):
+        token_filters,
+    ):
     tokenized_text_lst = tokenizer.cut(text_str)
     filted_tokens = []
     for token in tokenized_text_lst:
@@ -23,6 +25,7 @@ def tokenize_sentence_and_filte_tokens(
         filted_tokens.remove('')
     return ' '.join(filted_tokens)
 
+
 def set_sentence_splitting_token(sentence):
     sentence = re.sub('[^\w\d ]', ';', sentence)
     sentence = re.sub(';+', ';', sentence)
@@ -31,11 +34,13 @@ def set_sentence_splitting_token(sentence):
     sentence = re.sub('^ +| +$', '', sentence)
     return sentence.lower()
 
+
 def clean_sentence_splitting_token(sentence):
     sentence = re.sub(';', ' ', sentence)
     sentence = re.sub(' +', ' ', sentence)
     sentence = re.sub('^ +| +$', '', sentence)
     return sentence.lower()
+
 
 def split_sentence(
         sentence,
@@ -66,6 +71,7 @@ def split_sentence(
     elif sentence_length >= min_sentence_length:
         splitted_sentences.append(' '.join(short_sentence_list))
     return splitted_sentences
+
 
 def split_document(
         document,

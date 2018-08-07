@@ -2,6 +2,7 @@ import unittest
 
 from purewords.tokenizer import YoctolTokenizer
 
+
 class TestYoctolJiebaClass(unittest.TestCase):
 
     def setUp(self):

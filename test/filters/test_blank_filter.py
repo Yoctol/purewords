@@ -3,6 +3,7 @@ from unittest import TestCase
 
 from purewords.filters import blank_filter
 
+
 class TestBlankFilterClass(TestCase):
 
     def setUp(self):

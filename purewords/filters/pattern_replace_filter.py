@@ -3,6 +3,7 @@ import re
 
 from .base_filter import BaseFilter
 
+
 class PatternReplaceFilter(BaseFilter):
 
     def __init__(self, patterns=[], replacement=''):

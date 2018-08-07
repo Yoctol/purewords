@@ -3,6 +3,7 @@ import unittest
 import purewords
 from purewords.__main__ import sentences_generator
 
+
 class TestPurewordsClass(unittest.TestCase):
 
     def test_clean_sentence(self):

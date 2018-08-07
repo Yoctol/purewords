@@ -7,6 +7,7 @@ from purewords.preprocessing import split_sentence
 
 from purewords.tokenizer import WhitespaceTokenizer
 
+
 class TestPreprocessingClass(unittest.TestCase):
 
     def setUp(self):
