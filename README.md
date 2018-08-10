@@ -1,5 +1,10 @@
 # purewords
 
+
+[![CircleCI](https://circleci.com/gh/Yoctol/purewords.svg?style=shield&circle-token=1ca80152fcd19316a6bde800a16e65f880feaf4e)](https://circleci.com/gh/Yoctol/purewords)
+[![pypi](https://img.shields.io/pypi/v/purewords.svg?style=flat)](https://pypi.python.org/pypi/purewords)
+
+
 Purewords is a package used to clean raw texts for all languages. 
 
 ## Install
